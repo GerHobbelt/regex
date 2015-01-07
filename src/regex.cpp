@@ -119,6 +119,11 @@ static void execute_eror()
    raise_runtime_error(err);
 }
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable:4715) // not all control paths return a value
+#endif   
+
 bool BOOST_REGEX_CALL abstract_protected_call::execute()const
 {
    __try{
@@ -128,8 +133,12 @@ bool BOOST_REGEX_CALL abstract_protected_call::execute()const
       execute_eror();
    }
    // We never really get here at all:
-   return false;
+   BOOST_UNREACHABLE_RETURN(false);
 }
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif   
 
 BOOST_REGEX_DECL void BOOST_REGEX_CALL reset_stack_guard_page()
 {

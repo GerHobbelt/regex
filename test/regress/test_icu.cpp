@@ -617,12 +617,12 @@ void test_icu(const wchar_t&, const test_regex_replace_tag&)
          //
          U_NAMESPACE_QUALIFIER UnicodeString expression16u, text16u, format16u, result16u, found16u;
          if(expression16.size())
-            expression16u.setTo(&*expression16.begin(), expression16.size());
+            expression16u.setTo(&*expression16.begin(), static_cast<int>(expression16.size()));
          if(text16.size())
-            text16u.setTo(&*text16.begin(), text16.size());
-         format16u.setTo(&*format16.begin(), format16.size()-1);
+            text16u.setTo(&*text16.begin(), static_cast<int>(text16.size()));
+         format16u.setTo(&*format16.begin(), static_cast<int>(format16.size())-1);
          if(result16.size())
-            result16u.setTo(&*result16.begin(), result16.size());
+            result16u.setTo(&*result16.begin(), static_cast<int>(result16.size()));
          r = boost::make_u32regex(expression16.begin(), expression16.end(), syntax_options);
          found16u = boost::u32regex_replace(text16u, r, format16u, opts);
          if(result16u != found16u)

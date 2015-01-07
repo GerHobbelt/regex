@@ -13,7 +13,7 @@
 
 #if defined(BOOST_MSVC)
 // this lets us compile at warning level 4 without seeing concept-check related warnings
-#  pragma warning(disable:4100)
+#  pragma warning(disable:4100 4244)
 #endif
 #ifdef __BORLANDC__
 #pragma option -w-8019 -w-8004 -w-8008

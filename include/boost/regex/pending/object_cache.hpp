@@ -57,6 +57,11 @@ private:
    friend struct data;
 };
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable:4715) // not all control paths return a value
+#endif   
+
 template <class Key, class Object>
 boost::shared_ptr<Object const> object_cache<Key, Object>::get(const Key& k, size_type l_max_cache_size)
 {
@@ -74,12 +79,16 @@ boost::shared_ptr<Object const> object_cache<Key, Object>::get(const Key& k, siz
    //
    ::boost::throw_exception(std::runtime_error("Error in thread safety code: could not acquire a lock"));
 #if defined(BOOST_NO_UNREACHABLE_RETURN_DETECTION) || defined(BOOST_NO_EXCEPTIONS)
-   return boost::shared_ptr<Object>();
+   BOOST_UNREACHABLE_RETURN(boost::shared_ptr<Object>());
 #endif
 #else
    return do_get(k, l_max_cache_size);
 #endif
 }
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif   
 
 template <class Key, class Object>
 boost::shared_ptr<Object const> object_cache<Key, Object>::do_get(const Key& k, size_type l_max_cache_size)

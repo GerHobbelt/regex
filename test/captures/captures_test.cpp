@@ -28,10 +28,10 @@
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
-template <int N>
-int array_size(const char* (&p)[N])
+template <unsigned N>
+unsigned array_size(const char* (&p)[N])
 {
-   for(int i = 0; i < N; ++i)
+   for(unsigned i = 0; i < N; ++i)
       if(p[i] == 0)
          return i;
    return N;

@@ -36,7 +36,7 @@ boost::regex_constants::syntax_option_type flags = boost::regex_constants::basic
 boost::regex re;
 boost::smatch what;
 std::string current_file;
-int file_count;
+size_t file_count;
 
 void process_stream(std::istream& is)
 {
