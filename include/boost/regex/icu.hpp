@@ -32,6 +32,7 @@
 #ifdef BOOST_MSVC
 #pragma warning (push)
 #pragma warning (disable: 4251)
+#pragma warning (disable: 4702) // unreachable code
 #endif
 
 namespace boost{
