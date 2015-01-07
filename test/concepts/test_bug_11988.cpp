@@ -64,7 +64,7 @@ struct char32_traits
    static bool isctype(char_type c, char_class_type t)
    {
       if(c < 0xff)
-         return boost::c_regex_traits<char>::isctype(c, t);
+         return boost::c_regex_traits<char>::isctype(static_cast<char>(c), t);
       return false;
    }
    static boost::intmax_t value(char_type c, int radix)

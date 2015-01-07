@@ -62,7 +62,7 @@ U_NAMESPACE_QUALIFIER UnicodeString extract_greek(const U_NAMESPACE_QUALIFIER Un
    if(boost::u32regex_search(text, what, r))
    {
       // extract $0 as a UnicodeString:
-      return U_NAMESPACE_QUALIFIER UnicodeString(what[0].first, what.length(0));
+      return U_NAMESPACE_QUALIFIER UnicodeString(what[0].first, static_cast<int>(what.length(0)));
    }
    else
    {

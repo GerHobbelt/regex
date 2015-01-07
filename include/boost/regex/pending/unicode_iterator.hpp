@@ -72,6 +72,11 @@ Accepts UTF-32 code points and forwards them on as UTF-16 code points.
 #endif
 #include <limits.h> // CHAR_BIT
 
+#ifdef BOOST_MSVC
+#pragma warning (push)
+#pragma warning (disable: 4702) // unreachable code
+#endif
+
 namespace boost{
 
 namespace detail{
@@ -780,6 +785,10 @@ private:
 };
 
 } // namespace boost
+
+#ifdef BOOST_MSVC
+#pragma warning (pop)
+#endif
 
 #endif // BOOST_REGEX_UNICODE_ITERATOR_HPP
 

@@ -21,7 +21,7 @@
 #include <list>
 
 
-unsigned tokenise(std::list<std::string>& l, std::string& s)
+size_t tokenise(std::list<std::string>& l, std::string& s)
 {
    return boost::regex_split(std::back_inserter(l), s);
 }
@@ -60,7 +60,7 @@ int main(int argc, const char*[])
       }
       else
          s = "This is a string of tokens";
-      unsigned result = tokenise(l, s);
+      size_t result = tokenise(l, s);
       cout << result << " tokens found" << endl;
       cout << "The remaining text is: \"" << s << "\"" << endl;
       while(l.size())
