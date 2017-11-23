@@ -144,8 +144,8 @@ c_regex_traits<char>::char_class_type BOOST_REGEX_CALL c_regex_traits<char>::loo
       char_class_unicode,
       char_class_upper,
       char_class_vertical,
-      char_class_alnum | char_class_word, 
-      char_class_alnum | char_class_word, 
+      char_class_type(char_class_alnum | char_class_word), 
+      char_class_type(char_class_alnum | char_class_word), 
       char_class_xdigit,
    };
 
