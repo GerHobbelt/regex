@@ -482,7 +482,7 @@ inline bool u32regex_match(const UChar* p,
 {
    return BOOST_REGEX_DETAIL_NS::do_regex_match(p, p+u_strlen(p), m, e, flags, static_cast<mpl::int_<2> const*>(0));
 }
-#if !defined(U_WCHAR_IS_UTF16) && (U_SIZEOF_WCHAR_T != 2) && !defined(BOOST_NO_WREGEX)
+#if !defined(BOOST_NO_CXX11_CHAR16_T) || (!defined(U_WCHAR_IS_UTF16) && (U_SIZEOF_WCHAR_T != 2) && !defined(BOOST_NO_WREGEX))
 inline bool u32regex_match(const wchar_t* p, 
                  match_results<const wchar_t*>& m, 
                  const u32regex& e, 
@@ -546,7 +546,7 @@ inline bool u32regex_match(const UChar* p,
    match_results<const UChar*> m;
    return BOOST_REGEX_DETAIL_NS::do_regex_match(p, p+u_strlen(p), m, e, flags, static_cast<mpl::int_<2> const*>(0));
 }
-#if !defined(U_WCHAR_IS_UTF16) && (U_SIZEOF_WCHAR_T != 2) && !defined(BOOST_NO_WREGEX)
+#if !defined(BOOST_NO_CXX11_CHAR16_T) || (!defined(U_WCHAR_IS_UTF16) && (U_SIZEOF_WCHAR_T != 2) && !defined(BOOST_NO_WREGEX))
 inline bool u32regex_match(const wchar_t* p, 
                  const u32regex& e, 
                  match_flag_type flags = match_default)
@@ -667,7 +667,7 @@ inline bool u32regex_search(const UChar* p,
 {
    return BOOST_REGEX_DETAIL_NS::do_regex_search(p, p+u_strlen(p), m, e, flags, p, static_cast<mpl::int_<2> const*>(0));
 }
-#if !defined(U_WCHAR_IS_UTF16) && (U_SIZEOF_WCHAR_T != 2) && !defined(BOOST_NO_WREGEX)
+#if !defined(BOOST_NO_CXX11_CHAR16_T) || (!defined(U_WCHAR_IS_UTF16) && (U_SIZEOF_WCHAR_T != 2) && !defined(BOOST_NO_WREGEX))
 inline bool u32regex_search(const wchar_t* p, 
                  match_results<const wchar_t*>& m, 
                  const u32regex& e, 
@@ -728,7 +728,7 @@ inline bool u32regex_search(const UChar* p,
    match_results<const UChar*> m;
    return BOOST_REGEX_DETAIL_NS::do_regex_search(p, p+u_strlen(p), m, e, flags, p, static_cast<mpl::int_<2> const*>(0));
 }
-#if !defined(U_WCHAR_IS_UTF16) && (U_SIZEOF_WCHAR_T != 2) && !defined(BOOST_NO_WREGEX)
+#if !defined(BOOST_NO_CXX11_CHAR16_T) || (!defined(U_WCHAR_IS_UTF16) && (U_SIZEOF_WCHAR_T != 2) && !defined(BOOST_NO_WREGEX))
 inline bool u32regex_search(const wchar_t* p, 
                  const u32regex& e, 
                  match_flag_type flags = match_default)
