@@ -55,34 +55,34 @@ inline void  verify_options(boost::regex_constants::syntax_option_type, match_fl
 template <class charT>
 inline bool can_start(charT c, const unsigned char* map, unsigned char mask)
 {
-   return ((c < static_cast<charT>(0)) ? true : ((c >= static_cast<charT>(1 << CHAR_BIT)) ? true : map[c] & mask));
+   return !!((c < static_cast<charT>(0)) ? true : ((c >= static_cast<charT>(1 << CHAR_BIT)) ? true : map[c] & mask));
 }
 inline bool can_start(char c, const unsigned char* map, unsigned char mask)
 {
-   return map[(unsigned char)c] & mask;
+   return !!(map[(unsigned char)c] & mask);
 }
 inline bool can_start(signed char c, const unsigned char* map, unsigned char mask)
 {
-   return map[(unsigned char)c] & mask;
+   return !!(map[(unsigned char)c] & mask);
 }
 inline bool can_start(unsigned char c, const unsigned char* map, unsigned char mask)
 {
-   return map[c] & mask;
+   return !!(map[c] & mask);
 }
 inline bool can_start(unsigned short c, const unsigned char* map, unsigned char mask)
 {
-   return ((c >= (1 << CHAR_BIT)) ? true : map[c] & mask);
+   return !!((c >= (1 << CHAR_BIT)) ? true : map[c] & mask);
 }
 #if defined(WCHAR_MIN) && (WCHAR_MIN == 0) && !defined(BOOST_NO_INTRINSIC_WCHAR_T)
 inline bool can_start(wchar_t c, const unsigned char* map, unsigned char mask)
 {
-   return ((c >= static_cast<wchar_t>(1u << CHAR_BIT)) ? true : map[c] & mask);
+   return !!((c >= static_cast<wchar_t>(1u << CHAR_BIT)) ? true : map[c] & mask);
 }
 #endif
 #if !defined(BOOST_NO_INTRINSIC_WCHAR_T)
 inline bool can_start(unsigned int c, const unsigned char* map, unsigned char mask)
 {
-   return (((c >= static_cast<unsigned int>(1u << CHAR_BIT)) ? true : map[c] & mask));
+   return !!(((c >= static_cast<unsigned int>(1u << CHAR_BIT)) ? true : map[c] & mask));
 }
 #endif
 
