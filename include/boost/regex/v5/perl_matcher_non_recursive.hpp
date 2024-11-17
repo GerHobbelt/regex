@@ -731,7 +731,7 @@ bool perl_matcher<BidiIterator, Allocator, traits>::match_dot_repeat_slow()
       if(count < rep->max)
          push_single_repeat(count, rep, position, saved_state_rep_slow_dot);
       pstate = rep->alt.p;
-      return (position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip);
+      return !!((position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip));
    }
 }
 
@@ -770,7 +770,7 @@ bool perl_matcher<BidiIterator, Allocator, traits>::match_dot_repeat_fast()
       if(count < rep->max)
          push_single_repeat(count, rep, position, saved_state_rep_fast_dot);
       pstate = rep->alt.p;
-      return (position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip);
+      return !!((position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip));
    }
 }
 
@@ -839,7 +839,7 @@ bool perl_matcher<BidiIterator, Allocator, traits>::match_char_repeat()
       if(count < rep->max)
          push_single_repeat(count, rep, position, saved_state_rep_char);
       pstate = rep->alt.p;
-      return (position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip);
+      return !!((position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip));
    }
 #ifdef BOOST_BORLANDC
 #pragma option pop
@@ -913,7 +913,7 @@ bool perl_matcher<BidiIterator, Allocator, traits>::match_set_repeat()
       if(count < rep->max)
          push_single_repeat(count, rep, position, saved_state_rep_short_set);
       pstate = rep->alt.p;
-      return (position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip);
+      return !!((position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip));
    }
 #ifdef BOOST_BORLANDC
 #pragma option pop
@@ -988,7 +988,7 @@ bool perl_matcher<BidiIterator, Allocator, traits>::match_long_set_repeat()
       if(count < rep->max)
          push_single_repeat(count, rep, position, saved_state_rep_long_set);
       pstate = rep->alt.p;
-      return (position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip);
+      return !!((position == last) ? (rep->can_be_null & mask_skip) : can_start(*position, rep->_map, mask_skip));
    }
 #ifdef BOOST_BORLANDC
 #pragma option pop
