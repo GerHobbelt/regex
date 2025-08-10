@@ -25,7 +25,7 @@
 #pragma warning(disable:1418 981 983 383)
 #endif
 
-int cpp_main( int , char* [] )
+int cpp_main(int, const char**)
 {
    std::string bad_text(1024, ' ');
    std::string good_text(200, ' ');

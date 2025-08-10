@@ -87,7 +87,7 @@ void run_tests()
    RUN_TESTS(test_verbs);
 }
 
-int cpp_main(int /*argc*/, char * /*argv*/[])
+int cpp_main(int /*argc*/, const char** /*argv*/)
 {
 #ifdef BOOST_HAS_ICU
    //

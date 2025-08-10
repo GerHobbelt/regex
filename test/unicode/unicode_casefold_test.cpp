@@ -194,7 +194,7 @@ void spot_checks()
 
 #endif
 
-int cpp_main( int, char* [] ) 
+int cpp_main(int, const char**) 
 {
 #if defined(BOOST_HAS_ICU)
   latin_1_checks();

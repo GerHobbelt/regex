@@ -210,7 +210,7 @@ void print_ctype_info(charT, const char* name)
 }
 #endif
 
-int cpp_main(int /*argc*/, char * /*argv*/[])
+int cpp_main(int /*argc*/, const char ** /*argv*/)
 {
    print_c_info(char(0), "char");
 #ifndef BOOST_NO_WREGEX

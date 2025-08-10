@@ -307,7 +307,7 @@ void test(const std::vector< ::boost::uint32_t>& v)
 #endif
 }
 
-int cpp_main( int, char* [] ) 
+int cpp_main(int, const char**) 
 {
    // test specific value points from the standard:
    spot_checks();

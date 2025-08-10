@@ -154,7 +154,7 @@ void test_search(const char* expression, const char* text, bool isperl = false, 
    }
 }
 
-int cpp_main(int argc, char* argv[])
+int cpp_main(int argc, const char** argv)
 {
    boost::filesystem::path here(__FILE__);
    here = here.parent_path().parent_path().parent_path().parent_path();

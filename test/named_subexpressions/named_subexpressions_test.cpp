@@ -103,7 +103,7 @@ void test_named_subexpressions(charT)
    }
 }
 
-int cpp_main( int , char* [] )
+int cpp_main(int, const char**)
 {
    test_named_subexpressions(char(0));
 #if !defined(BOOST_NO_WREGEX)

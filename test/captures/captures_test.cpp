@@ -116,7 +116,7 @@ void test_captures(const std::string& regx, const std::string& text, T& expected
 #endif
 }
 
-int cpp_main(int , char* [])
+int cpp_main(int argc, const char** argv)
 {
    typedef const char* pchar;
    pchar e1[4][5] = 

@@ -51,7 +51,7 @@ int test_object::s_count = 0;
 
 static const int max_cache_size = 5;
 
-int cpp_main(int /*argc*/, char * /*argv*/[])
+int cpp_main(int /*argc*/, const char** /*argv*/)
 {
    int i;
    for(i = 0; i < 20; ++i)

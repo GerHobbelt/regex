@@ -25,7 +25,7 @@
 #pragma warning(disable:1418 981 983 383)
 #endif
 
-int cpp_main( int , char* [] )
+int cpp_main(int, const char**)
 {
    // this regex will recurse twice for each whitespace character matched:
    boost::regex e("([[:space:]]|.)+");
