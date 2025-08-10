@@ -30,8 +30,10 @@
 
 #include <boost/regex/v5/basic_regex.hpp>
 
+#ifndef BOOST_REGEX_AS_MODULE
 #include <vector>
 #include <set>
+#endif
 
 namespace boost{
 
@@ -220,8 +222,10 @@ public:
          m_icase = static_cast<bool>(f & regbase::icase);
       }
    }
-   re_syntax_base* append_state(syntax_element_type t, std::size_t s = sizeof(re_syntax_base));
-   re_syntax_base* insert_state(std::ptrdiff_t pos, syntax_element_type t, std::size_t s = sizeof(re_syntax_base));
+   re_syntax_base* append_state(syntax_element_type t, std::size_t s);
+   re_syntax_base* append_state(syntax_element_type t) { return append_state(t, sizeof(re_syntax_base)); }
+   re_syntax_base* insert_state(std::ptrdiff_t pos, syntax_element_type t, std::size_t s);
+   re_syntax_base* insert_state(std::ptrdiff_t pos, syntax_element_type t) { return insert_state(pos, t, sizeof(re_syntax_base)); }
    re_literal* append_literal(charT c);
    re_syntax_base* append_set(const basic_char_set<charT, traits>& char_set);
    re_syntax_base* append_set(const basic_char_set<charT, traits>& char_set, std::integral_constant<bool, false>*);
@@ -974,7 +978,12 @@ template <class charT, class traits>
 int basic_regex_creator<charT, traits>::calculate_backstep(re_syntax_base* state)
 {
    typedef typename traits::char_class_type m_type;
+
    int result = 0;
+   int last_alternative_result = -1;
+
+   std::vector<std::tuple<int, re_syntax_base*>> stack;
+
    while(state)
    {
       switch(state->type)
@@ -993,9 +1002,28 @@ int basic_regex_creator<charT, traits>::calculate_backstep(re_syntax_base* state
          }
          break;
       case syntax_element_endmark:
-         if((static_cast<re_brace*>(state)->index == -1)
+         if ((static_cast<re_brace*>(state)->index == -1)
             || (static_cast<re_brace*>(state)->index == -2))
-            return result;
+         {
+            // We've finished the calculation, check against any previous alternatives:
+            if (last_alternative_result >= 0)
+            {
+               if (last_alternative_result != result)
+                  return -1;
+            }
+            else
+               last_alternative_result = result;
+
+            if (stack.size())
+            {
+               // Skip to next alternative and calculate that as well:
+               std::tie(result, state) = stack.back();
+               stack.pop_back();
+               continue;
+            }
+            else
+               return result;
+         }
          break;
       case syntax_element_literal:
          result += static_cast<re_literal*>(state)->length;
@@ -1051,11 +1079,13 @@ int basic_regex_creator<charT, traits>::calculate_backstep(re_syntax_base* state
          continue;
       case syntax_element_alt:
          {
-            int r1 = calculate_backstep(state->next.p);
-            int r2 = calculate_backstep(static_cast<re_alt*>(state)->alt.p);
-            if((r1 < 0) || (r1 != r2))
+            // Push the alternative if we haven't pushed too many already:
+            if(stack.size() > BOOST_REGEX_MAX_BLOCKS)
                return -1;
-            return result + r1;
+            stack.push_back(std::make_tuple(result, static_cast<re_alt*>(state)->alt.p));
+            // and take the first one:
+            state = state->next.p;
+            continue;
          }
       default:
          break;
