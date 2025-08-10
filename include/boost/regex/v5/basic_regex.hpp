@@ -600,32 +600,32 @@ public:
    //
    const BOOST_REGEX_DETAIL_NS::re_syntax_base* get_first_state()const
    {
-      BOOST_REGEX_ASSERT(0 != m_pimpl.get());
+      BOOST_REGEX_ASSERT(nullptr != m_pimpl.get());
       return m_pimpl->get_first_state();
    }
    unsigned get_restart_type()const
    {
-      BOOST_REGEX_ASSERT(0 != m_pimpl.get());
+      BOOST_REGEX_ASSERT(nullptr != m_pimpl.get());
       return m_pimpl->get_restart_type();
    }
    const unsigned char* get_map()const
    {
-      BOOST_REGEX_ASSERT(0 != m_pimpl.get());
+      BOOST_REGEX_ASSERT(nullptr != m_pimpl.get());
       return m_pimpl->get_map();
    }
    const ::boost::regex_traits_wrapper<traits>& get_traits()const
    {
-      BOOST_REGEX_ASSERT(0 != m_pimpl.get());
+      BOOST_REGEX_ASSERT(nullptr != m_pimpl.get());
       return m_pimpl->get_traits();
    }
    bool can_be_null()const
    {
-      BOOST_REGEX_ASSERT(0 != m_pimpl.get());
+      BOOST_REGEX_ASSERT(nullptr != m_pimpl.get());
       return m_pimpl->can_be_null();
    }
    const BOOST_REGEX_DETAIL_NS::regex_data<charT, traits>& get_data()const
    {
-      BOOST_REGEX_ASSERT(0 != m_pimpl.get());
+      BOOST_REGEX_ASSERT(nullptr != m_pimpl.get());
       return m_pimpl->get_data();
    }
    std::shared_ptr<BOOST_REGEX_DETAIL_NS::named_subexpressions > get_named_subs()const
