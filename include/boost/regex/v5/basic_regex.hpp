@@ -307,7 +307,7 @@ public:
    }
    bool can_be_null()const
    {
-      return this->m_can_be_null;
+      return bool(this->m_can_be_null);
    }
    const regex_data<charT, traits>& get_data()const
    {
