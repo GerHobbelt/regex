@@ -15,12 +15,16 @@ on:
   release:
     types: [published, created, edited]
 
+concurrency:
+  group: ${{format('{0}:{1}', github.repository, github.ref)}}
+  cancel-in-progress: true
+
 env:
   UBSAN_OPTIONS: print_stacktrace=1
 
 jobs:
   ubuntu-jammy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -120,7 +124,7 @@ jobs:
         run: ../../../b2 toolset=$TOOLSET define=CI_SUPPRESS_KNOWN_ISSUES define=SLOW_COMPILER
         working-directory: ../boost-root/libs/regex/test
   ubuntu-jammy-clang-18-modules:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
         with:
